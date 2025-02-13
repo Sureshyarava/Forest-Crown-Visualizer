@@ -6,6 +6,15 @@ export default defineConfig(({ mode }) => {
 
   return {
     base: '/Forest-Crown-Visualizer/',
+    build: {
+      outDir: 'dist',
+      assetsDir: 'assets', // Explicit assets directory
+      rollupOptions: {
+        output: {
+          assetFileNames: 'assets/[name]-[hash][extname]' // Ensure proper asset paths
+        }
+      }
+    },
     plugins: [react()],
     server: {
       proxy: {
