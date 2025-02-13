@@ -187,7 +187,7 @@ const CombinedGeospatialViewer = ({ date }) => {
         }
 
         try {
-            const response = await fetch('/api/observations', {
+            const response = await fetch(`${apiUrl}/observations`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
