@@ -31,13 +31,14 @@ const CombinedGeospatialViewer = ({ date }) => {
     const [submittedFeatures, setSubmittedFeatures] = useState(new Set()); // Add this to track submitted features
     const [vectorLayer, setVectorLayer] = useState(null);
     const [message, setMessage] = useState('');
+    const apiUrl = import.meta.env.VITE_API_URL || '/api';
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const [imageRes, crownsRes] = await Promise.all([
-                    fetch(`/api/image?date=${date}`),
-                    fetch(`/api/crowns?date=${date}`)
+                    fetch(`${apiUrl}/image?date=${date}`),
+                    fetch(`${apiUrl}/crowns?date=${date}`)
                 ]);
 
                 if (!imageRes.ok || !crownsRes.ok) throw new Error('Data fetch failed');
@@ -69,7 +70,7 @@ const CombinedGeospatialViewer = ({ date }) => {
 
                 const imageLayer = new ImageLayer({
                     source: new Static({
-                        url: `/api/render-image?date=${date}`,
+                        url: `${apiUrl}/render-image?date=${date}`,
                         imageExtent,
                         projection: 'EPSG:32617'
                     })
