@@ -64,7 +64,7 @@ const DateSelector = () => {
                     ))}
                 </select>
             </div>
-            <CombinedGeospatialViewer date={selectedDate} maxSize={2048}/>
+            <CombinedGeospatialViewer date={selectedDate} maxSize={3930}/>
         </div>
     );
 };

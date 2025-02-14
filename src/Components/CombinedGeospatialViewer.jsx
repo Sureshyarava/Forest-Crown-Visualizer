@@ -158,8 +158,8 @@ const CombinedGeospatialViewer = ({ date }) => {
             } : null);
 
             // Force vector layer to refresh its style when selection changes
-            if (vector) {
-                vector.getSource().refresh();
+            if (vector && !selectedFeature) {
+                vectorLayer?.getSource()?.refresh();
             }
         };
 
@@ -411,21 +411,34 @@ const CombinedGeospatialViewer = ({ date }) => {
         <div style={{
             display: 'flex',
             flexDirection: window.innerWidth < 768 ? 'column' : 'row',
-            height: '100vh'
+            height: '100vh',
+            border: '2px solid #e5e7eb', // Main container border
+            borderRadius: '8px',
+            boxSizing: 'border-box',
+            overflow: 'hidden' // Contain child borders
         }}>
             <div style={{
                 flex: 1,
-                width: selectedFeature && window.innerWidth >= 768 ? '66.666667%' : '100%'
+                width: selectedFeature && window.innerWidth >= 768 ? '66.666667%' : '100%',
+                borderRight: window.innerWidth >= 768 ? '2px solid #e5e7eb' : 'none', // Responsive right border
+                boxSizing: 'border-box'
             }}>
                 <div ref={mapRef} style={{
                     width: '100%',
-                    height: '100%'
+                    height: '100%',
+                    border: '1px solid #d1d5db', // Map container border
+                    borderRadius: '6px',
+                    boxSizing: 'border-box'
                 }} />
             </div>
             {selectedFeature && (
                 <div style={{
                     width: window.innerWidth >= 768 ? '33.333333%' : '100%',
-                    maxWidth: '32rem'
+                    maxWidth: '32rem',
+                    borderLeft: window.innerWidth >= 768 ? '2px solid #e5e7eb' : 'none', // Responsive left border
+                    borderTop: window.innerWidth < 768 ? '2px solid #e5e7eb' : 'none',
+                    boxSizing: 'border-box',
+                    backgroundColor: 'white'
                 }}>
                     {detailsPanel}
                 </div>
